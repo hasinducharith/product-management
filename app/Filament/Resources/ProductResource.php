@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Jobs\ProcessProduct;
 use App\Livewire\StatusBar;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -64,6 +64,11 @@ class ProductResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('process')
+                    ->action(function (Product $record) {
+                        ProcessProduct::dispatch($record);
+                    })
+                    ->icon('heroicon-o-cog')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
