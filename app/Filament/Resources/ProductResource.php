@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Livewire\StatusBar;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductType;
@@ -44,6 +45,7 @@ class ProductResource extends Resource
                         $set('product_category_id', null);
                         $set('available_categories', $categories);
                     }),
+                Forms\Components\Livewire::make(StatusBar::class),
             ]);
     }
 
